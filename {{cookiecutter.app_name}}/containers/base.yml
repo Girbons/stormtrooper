@@ -2,14 +2,14 @@ version: "2"
 
 services:
   postgres:
-    image: library/postgres:9.5.4
+    image: library/postgres:9.6.1
     environment:
       - POSTGRES_USER=devel
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB={{ cookiecutter.app_name }}
 
   redis:
-    image: library/redis:3.2.1
+    image: library/redis:3.2.5
 
   django:
     build:
