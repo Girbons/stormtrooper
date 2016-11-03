@@ -4,33 +4,20 @@ import dj_database_url
 from getenv import env
 
 
-# django-{{ cookiecutter.app_name }} is the root folder
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_DIR = os.path.join(BASE_DIR, '..')
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# security
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = env('DJANGO_DEBUG', False)
 
 ALLOWED_HOSTS = env('DJANGO_ALLOWED_HOSTS', '').replace(' ', '').split(',')
 
-DEBUG = env('DJANGO_DEBUG', False)
 
-# apps and middleware
+# Application definition
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +27,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 )
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -73,13 +60,65 @@ TEMPLATES = [
 
 WSGI_APPLICATION = '{{ cookiecutter.app_name }}.wsgi.application'
 
-# database configuration
+
+# Database
+# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+
 DATABASES_DEFAULT = 'postgres://devel:123456@127.0.0.1:5432/{{ cookiecutter.app_name }}'
 DATABASES = {
     'default': dj_database_url.config(default=DATABASES_DEFAULT),
 }
 
+
+# Password validation
+# https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/1.10/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.10/howto/static-files/
+
+ASSETS_ROOT = env('DJANGO_ASSETS_ROOT', BASE_DIR)
+STATIC_HOST = env('DJANGO_STATIC_HOST', '')
+
+STATIC_URL = STATIC_HOST + '/static/'
+MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(ASSETS_ROOT, 'static')
+MEDIA_ROOT = os.path.join(ASSETS_ROOT, 'media')
+
+
 # Cache
+# https://docs.djangoproject.com/en/1.10/ref/settings/#caches
+
 CACHES_DEFAULT = 'redis://127.0.0.1:6379/1'
 CACHES = {
     'default': {
@@ -92,29 +131,19 @@ CACHES = {
     }
 }
 
-# internationalization
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
 
-# static files and media
-ASSETS_ROOT = env('DJANGO_ASSETS_ROOT', BASE_DIR)
-STATIC_HOST = env('DJANGO_STATIC_HOST', '')
+# Emails
+# https://docs.djangoproject.com/en/1.10/ref/settings/#email-backend
 
-STATIC_URL = STATIC_HOST + '/static/'
-MEDIA_URL = '/media/'
-STATIC_ROOT = os.path.join(ASSETS_ROOT, 'static')
-MEDIA_ROOT = os.path.join(ASSETS_ROOT, 'media')
-
-# emails
 DEFAULT_FROM_EMAIL = env('DJANGO_FROM_EMAIL')
 
 EMAIL_BACKEND_DEFAULT = 'django.core.mail.backends.console.EmailBackend'
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', EMAIL_BACKEND_DEFAULT)
 
-# logging
+
+# Logging
+# https://docs.djangoproject.com/en/1.10/topics/logging/
+
 LOGSTASH_HOST = env('LOGSTASH_HOST', '127.0.0.1')
 LOGSTASH_PORT = env('LOGSTASH_PORT', 5000)
 
