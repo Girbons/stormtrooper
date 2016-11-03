@@ -18,5 +18,5 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["uwsgi", "--need-app", "--chdir", "django-{{ cookiecutter.app_name }}",
+CMD ["uwsgi", "--need-app", "--chdir", "django-{{ cookiecutter.app_name }}", \
      "--py-autoreload", "1", "--http", "8000", "--module", "{{ cookiecutter.app_name }}.wsgi"]
