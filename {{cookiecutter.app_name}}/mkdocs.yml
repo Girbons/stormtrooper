@@ -1,0 +1,5 @@
+site_name: {{ cookiecutter.project_name }} Docs
+theme: readthedocs
+pages:
+  - Home: index.md
+  - Deployment: deployment.md

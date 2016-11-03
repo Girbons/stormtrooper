@@ -1,0 +1,27 @@
+version: "2"
+
+services:
+  postgres:
+    extends:
+      file: ./containers/base.yml
+      service: postgres
+
+  redis:
+    extends:
+      file: ./containers/base.yml
+      service: redis
+
+  django:
+    extends:
+      file: ./containers/base.yml
+      service: django
+
+  docs:
+    extends:
+      file: ./containers/base.yml
+      service: docs
+
+  mailhog:
+    extends:
+      file: ./containers/base.yml
+      service: mailhog
