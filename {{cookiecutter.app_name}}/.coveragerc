@@ -6,3 +6,7 @@ omit =
     django-{{ cookiecutter.app_name }}/manage.py
     django-{{ cookiecutter.app_name }}/{{ cookiecutter.app_name }}/wsgi.py
     django-{{ cookiecutter.app_name }}/{{ cookiecutter.app_name }}/settings/production.py
+
+[report]
+skip_covered = True
+show_missing = True
