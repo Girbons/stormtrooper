@@ -2,7 +2,7 @@
 Stormtrooper
 ============
 
-If `Django`_ is your first choice for the conquest of the Internet, you need something that spawns quickly your
+If `Django`_ + `Wagtail`_ is your first choice for the conquest of the Internet, you need something that spawns quickly your
 Django applications!
 
 Getting started
@@ -14,7 +14,7 @@ The Internet is your target; start spawning your first expendable stormtrooper:
 
     $ mktmpenv
     $ pip install cookiecutter
-    $ cookiecutter https://github.com/palazzem/stormtrooper
+    $ cookiecutter https://github.com/girbons/stormtrooper
 
     # it outputs
     Cloning into 'stormtrooper'...
@@ -28,6 +28,7 @@ Now you should give a name to your stormtrooper. Wait it's a stormtrooper, they 
 
 .. code-block:: bash
 
+    project_name [Storm Trooper]: django
     app_name [stormtrooper]: stormtrooper
 
 The assault checklist
@@ -45,10 +46,10 @@ The assault checklist
 .. _NewRelic: https://newrelic.com/
 .. _Sentry: https://getsentry.com/
 
-Optional
+Docker
 ~~~~~~~~
 
-1. Add a ``docker-compose.yml`` to define your backend services
+1. Start your app with ``docker-compose up``
 
 License
 -------
@@ -56,9 +57,13 @@ License
 ``Stormtrooper`` is released under the terms of the **BSD license**. Full details in ``LICENSE`` file.
 
 .. _Django: https://www.djangoproject.com/
+.. _Wagtail: https://wagtail.io/
 
 Credits
 -------
+
+* `Django-wheelie`_ Integration between Wheelie and Django
+.. _Django-wheelie: https://github.com/palazzem/django-wheelie
 
 * `Cookiecutter`_ for template spawning!
 

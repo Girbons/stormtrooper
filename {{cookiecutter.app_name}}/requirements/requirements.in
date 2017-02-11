@@ -1,5 +1,6 @@
 # base stuff
 django
+wagtail
 django-getenv
 django-redis
 dj-database-url

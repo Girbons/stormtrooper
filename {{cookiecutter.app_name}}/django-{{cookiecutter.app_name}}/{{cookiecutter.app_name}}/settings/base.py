@@ -19,12 +19,31 @@ ALLOWED_HOSTS = env('DJANGO_ALLOWED_HOSTS', '').replace(' ', '').split(',')
 # Application definition
 
 INSTALLED_APPS = (
+    'home',
+
+    'wagtail.wagtailforms',
+    'wagtail.wagtailredirects',
+    'wagtail.wagtailembeds',
+    'wagtail.wagtailsites',
+    'wagtail.wagtailusers',
+    'wagtail.wagtailsnippets',
+    'wagtail.wagtaildocs',
+    'wagtail.wagtailimages',
+    'wagtail.wagtailsearch',
+    'wagtail.wagtailadmin',
+    'wagtail.wagtailcore',
+
+    'taggit',
+    'modelcluster',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'wheelie',
 )
 
 MIDDLEWARE = [
@@ -36,6 +55,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 ]
 
 ROOT_URLCONF = '{{ cookiecutter.app_name }}.urls'
@@ -115,6 +137,10 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(ASSETS_ROOT, 'static')
 MEDIA_ROOT = os.path.join(ASSETS_ROOT, 'media')
 
+WAGTAIL_SITE_NAME = '{{ cookiecutter.app_name }}'
+
+# configure this ENV var before the deploy
+BASE_URL = 'https://{{ cookiecutter.app_name }}.com'
 
 # Cache
 # https://docs.djangoproject.com/en/1.10/ref/settings/#caches
